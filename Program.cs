@@ -1,10 +1,7 @@
-﻿using System;
+﻿using Entities.classes;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities.classes;
 
 namespace lunaplena_caja
 {
@@ -12,37 +9,37 @@ namespace lunaplena_caja
     {
         static void Main(string[] args)
         {
-            // PATH TO ALL REQUIRED FILES
+            // PATH TO ALL REQUIRED FILES, they should be in release folder. 
             string SENDERS_PATH_FILE = "remitentes.txt";
             string BRANDS_PATH_FIlE = "marcas.txt";
             string SALES_PATH_FILE = "ventas.txt";
             string SORTED_SALES_PATH_FILE = "ventas_ordenadas.txt";
-            string WITHOUT_REQUIRED_FILE_ERROR_MESSAGE = "Error!, faltan archivos requeridos.";
+            string WITHOUT_REQUIRED_FILE_ERROR_MESSAGE = "Error!, falta un archivo requerido.";
 
 
             try
             {
                 if (!File.Exists(BRANDS_PATH_FIlE))
                 {
-                    Console.WriteLine(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE);
+                    ConsoleMessageLogger.LogErrorToConsole(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE);
                     return;
                 }
 
                 if (!File.Exists(SALES_PATH_FILE))
                 {
-                    Console.WriteLine(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE);
+                    ConsoleMessageLogger.LogErrorToConsole(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE);
                     return;
                 }
 
                 if (!File.Exists(SORTED_SALES_PATH_FILE))
                 {
-                    Console.WriteLine(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE);
+                    ConsoleMessageLogger.LogErrorToConsole(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE);
                     return;
                 }
 
                 if (File.Exists(SENDERS_PATH_FILE))
                 {
-                    Console.WriteLine(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE);
+                    ConsoleMessageLogger.LogErrorToConsole(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE);
                     return;
 
                 }
@@ -56,11 +53,8 @@ namespace lunaplena_caja
                 // MAKE LISTS FROM THE READED LINES
                 List<Remitente> remitentes = Remitente.GetAllFromStringArray(sendersData);
                 List<Sale> sales = Sale.GetAllFromStringArray(salesData);
-
-                // SET SENDERS IN OUR SALES FILE
-                Sale.senders = remitentes;
+                Sale.senders = remitentes; // SET SENDERS INTO OUR SALE CLASS
                 List<Marca> marcas = Marca.GetAllFromStringArray(brandsData);
-
 
 
                 // me paro en cada marca 
@@ -73,7 +67,6 @@ namespace lunaplena_caja
                         {
                             sale.hasMatch = true;
                             marca.addSale(sale);
-
                         }
                     }
                 }
@@ -95,6 +88,9 @@ namespace lunaplena_caja
 
             Console.ReadKey();
         }
+
+
+
     }
 
 }
