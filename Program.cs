@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entities;
+using Entities.classes;
 
 namespace lunaplena_caja
 {
@@ -13,10 +13,12 @@ namespace lunaplena_caja
         static void Main(string[] args)
         {
             // PATH TO ALL REQUIRED FILES
+            string SENDERS_PATH_FILE = "remitentes.txt";
             string BRANDS_PATH_FIlE = "marcas.txt";
             string SALES_PATH_FILE = "ventas.txt";
             string SORTED_SALES_PATH_FILE = "ventas_ordenadas.txt";
             string WITHOUT_REQUIRED_FILE_ERROR_MESSAGE = "Error!, faltan archivos requeridos.";
+
 
             try
             {
@@ -38,14 +40,28 @@ namespace lunaplena_caja
                     return;
                 }
 
+                if (File.Exists(SENDERS_PATH_FILE))
+                {
+                    Console.WriteLine(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE);
+                    return;
+
+                }
+
 
                 // EXTRACT EVERY LINE OF DATA FROM .TXT FILES 
                 string[] salesData = File.ReadAllLines(SALES_PATH_FILE);
                 string[] brandsData = File.ReadAllLines(BRANDS_PATH_FIlE);
+                string[] sendersData = File.ReadAllLines(SENDERS_PATH_FILE);
 
                 // MAKE LISTS FROM THE READED LINES
-                List<Sale> sales = Sale.GetSalesFromStringArray(salesData);
-                List<Marca> marcas = Marca.GetMarcasFromStringArray(brandsData);
+                List<Remitente> remitentes = Remitente.GetAllFromStringArray(sendersData);
+                List<Sale> sales = Sale.GetAllFromStringArray(salesData);
+
+                // SET SENDERS IN OUR SALES FILE
+                Sale.senders = remitentes;
+                List<Marca> marcas = Marca.GetAllFromStringArray(brandsData);
+
+
 
                 // me paro en cada marca 
                 foreach (var marca in marcas)
@@ -57,6 +73,7 @@ namespace lunaplena_caja
                         {
                             sale.hasMatch = true;
                             marca.addSale(sale);
+
                         }
                     }
                 }
