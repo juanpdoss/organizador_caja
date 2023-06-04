@@ -14,32 +14,32 @@ namespace lunaplena_caja
             string BRANDS_PATH_FIlE = "marcas.txt";
             string SALES_PATH_FILE = "ventas.txt";
             string SORTED_SALES_PATH_FILE = "ventas_ordenadas.txt";
-            string WITHOUT_REQUIRED_FILE_ERROR_MESSAGE = "Error!, falta un archivo requerido.";
+            string WITHOUT_REQUIRED_FILE_ERROR_MESSAGE = "Error, falta el siguente archivo requerido : ";
 
 
             try
             {
                 if (!File.Exists(BRANDS_PATH_FIlE))
                 {
-                    ConsoleMessageLogger.LogErrorToConsole(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE);
+                    ConsoleMessageLogger.LogErrorToConsole(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE + BRANDS_PATH_FIlE);
                     return;
                 }
 
                 if (!File.Exists(SALES_PATH_FILE))
                 {
-                    ConsoleMessageLogger.LogErrorToConsole(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE);
+                    ConsoleMessageLogger.LogErrorToConsole(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE + SALES_PATH_FILE);
                     return;
                 }
 
                 if (!File.Exists(SORTED_SALES_PATH_FILE))
                 {
-                    ConsoleMessageLogger.LogErrorToConsole(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE);
+                    ConsoleMessageLogger.LogErrorToConsole(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE + SORTED_SALES_PATH_FILE);
                     return;
                 }
 
-                if (File.Exists(SENDERS_PATH_FILE))
+                if (!File.Exists(SENDERS_PATH_FILE))
                 {
-                    ConsoleMessageLogger.LogErrorToConsole(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE);
+                    ConsoleMessageLogger.LogErrorToConsole(WITHOUT_REQUIRED_FILE_ERROR_MESSAGE + SENDERS_PATH_FILE);
                     return;
 
                 }

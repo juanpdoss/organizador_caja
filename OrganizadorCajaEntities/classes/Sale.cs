@@ -48,7 +48,7 @@ namespace Entities.classes
                 // quita la parte que sigue, que tiene un  formato de -> [fora y fecha] SENDER:
                 // antes de retornarla, tambien quita espacios en blanco al princio y al final de la cadena. 
 
-                const string DEFAULT_SENDER = "Luna plena";
+                const string DEFAULT_SENDER = "Luna Plena";
                 string COMPLETE_DEFAULT_PATTERN = $" {DEFAULT_SENDER}:";
 
                 if(senders.Count == 0)

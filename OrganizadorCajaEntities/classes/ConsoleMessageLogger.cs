@@ -13,9 +13,12 @@ namespace Entities.classes
     {
         public static void LogErrorToConsole(string errorMessage, bool waitUntilUserPressAnyKey = true)
         {
+            Console.ForegroundColor = ConsoleColor.Red; // Cambia el color del texto a amarillo
+
             Console.WriteLine(errorMessage, ConsoleColor.Red);
 
-            if(waitUntilUserPressAnyKey)
+            Console.ResetColor();
+            if (waitUntilUserPressAnyKey)
             {
                 Console.ReadKey();
             }
